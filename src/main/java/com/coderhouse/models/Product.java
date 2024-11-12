@@ -13,10 +13,10 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Products")
-public class Products {
+public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 
 	@Column(name = "product_description", nullable = false)
 	private String description;
@@ -32,14 +32,14 @@ public class Products {
 
 	// Relación uno a muchos con InvoiceDetails
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Invoice_Details> invoiceDetails;
+	private List<Invoice_Detail> invoiceDetails;
 
 	// Constructor
-	public Products() {
+	public Product() {
 	}
 
 	// Constructor
-	public Products(String description, String code, int stock, double price) {
+	public Product(String description, String code, int stock, double price) {
 		this.description = description;
 		this.code = code;
 		this.stock = stock;
@@ -47,11 +47,11 @@ public class Products {
 	}
 
 	// Getters & Setters
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -87,11 +87,11 @@ public class Products {
 		this.price = price;
 	}
 
-	public List<Invoice_Details> getInvoiceDetails() {
+	public List<Invoice_Detail> getInvoiceDetails() {
 		return invoiceDetails;
 	}
 
-	public void setInvoiceDetails(List<Invoice_Details> invoiceDetails) {
+	public void setInvoiceDetails(List<Invoice_Detail> invoiceDetails) {
 		this.invoiceDetails = invoiceDetails;
 	}
 

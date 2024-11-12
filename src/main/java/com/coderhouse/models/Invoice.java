@@ -19,82 +19,79 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Invoices")
 public class Invoice {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "created_at", nullable = false)
-	private LocalDateTime created_at = LocalDateTime.now();
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime created_at = LocalDateTime.now();
 
-	@Column(name = "total", nullable = false)
-	private double total;
+    @Column(name = "total", nullable = false)
+    private double total;
 
-	// Relación muchos a uno con Clients
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "client_id", nullable = false)
-	private Clients client;
+    // Relación muchos a uno con Client
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
 
-	// Relación uno a muchos con InvoiceDetails
-	@OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Invoice_Details> invoiceDetails = new ArrayList<>();
+    // Relación uno a muchos con InvoiceDetail
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Invoice_Detail> invoiceDetails = new ArrayList<>();
 
-	// Constructores
+    // Constructores
+    public Invoice() {
+    }
 
-	public Invoice() {
-	}
+    public Invoice(LocalDateTime created_at, Double total, Client client) {
+        this.created_at = created_at;
+        this.total = total;
+        this.client = client;
+    }
 
-	public Invoice(LocalDateTime created_at, Double total, Clients client) {
-		this.created_at = created_at;
-		this.total = total;
-		this.client = client;
-	}
+    // Getters & Setters
+    public Long getId() {
+        return id;
+    }
 
-	// Getters & Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public LocalDateTime getCreated_at() {
+        return created_at;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setCreated_at(LocalDateTime created_at) {
+        this.created_at = created_at;
+    }
 
-	public LocalDateTime getCreated_at() {
-		return created_at;
-	}
+    public double getTotal() {
+        return total;
+    }
 
-	public void setCreated_at(LocalDateTime created_at) {
-		this.created_at = created_at;
-	}
+    public void setTotal(double total) {
+        this.total = total;
+    }
 
-	public double getTotal() {
-		return total;
-	}
+    public Client getClient() {
+        return client;
+    }
 
-	public void setTotal(double total) {
-		this.total = total;
-	}
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
-	public Clients getClient() {
-		return client;
-	}
+    public List<Invoice_Detail> getInvoiceDetails() {
+        return invoiceDetails;
+    }
 
-	public void setClient(Clients client) {
-		this.client = client;
-	}
+    public void setInvoiceDetails(List<Invoice_Detail> invoiceDetails) {
+        this.invoiceDetails = invoiceDetails;
+    }
 
-	public List<Invoice_Details> getInvoiceDetails() {
-		return invoiceDetails;
-	}
-
-	public void setInvoiceDetails(List<Invoice_Details> invoiceDetails) {
-		this.invoiceDetails = invoiceDetails;
-	}
-
-	@Override
-	public String toString() {
-		return "Invoice [id=" + id + ", created_at=" + created_at + ", total=" + total + ", client=" + client
-				+ ", invoiceDetails=" + invoiceDetails + "]";
-	}
-
+    @Override
+    public String toString() {
+        return "Invoice [id=" + id + ", created_at=" + created_at + ", total=" + total + ", client=" + client
+                + ", invoiceDetails=" + invoiceDetails + "]";
+    }
 }

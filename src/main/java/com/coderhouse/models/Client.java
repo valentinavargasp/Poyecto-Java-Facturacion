@@ -14,10 +14,10 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Clients")
-public class Clients {
+public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 
 	@Column(name = "client_name")
 	private String name;
@@ -34,10 +34,10 @@ public class Clients {
 
 	// Constructores
 
-	public Clients() {
+	public Client() {
 	}
 
-	public Clients(String name, String lastname, String docnumber) {
+	public Client(String name, String lastname, String docnumber) {
 		this.name = name;
 		this.lastname = lastname;
 		this.docnumber = docnumber;
@@ -45,11 +45,11 @@ public class Clients {
 
 	// Getters & Setters
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
